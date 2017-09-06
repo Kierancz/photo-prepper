@@ -1,0 +1,29 @@
+{
+  "name": "photo-prepper",
+  "version": "1.0.0",
+  "description": "Resize photos and create customized photo collection objects",
+  "main": "editor.js",
+  "repository": "https://github.com/Kierancz/photo-prepper.git",
+  "scripts": {
+    "start": "node editor.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "photo",
+    "collection",
+    "json",
+    "editor",
+    "resize"
+  ],
+  "author": "Kieran Czerwinski",
+  "license": "ISC",
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "glob": "^7.1.2",
+    "image-size": "^0.6.1",
+    "image-size-export": "^0.1.0",
+    "path": "^0.12.7",
+    "sharp": "^0.18.2",
+    "sortablejs": "^1.6.1"
+  }
+}
