@@ -1,58 +1,66 @@
-var imageExport = require('image-size');
+var fs = require('fs');
+var glob = require('glob');
+var path = require('path');
+//var helpers = require('./utils');
+var sizeOf = require('image-size');
+var formatJSON = require('format-json');
+var mkdirp = require('mkdirp');
+var sharp = require('sharp');
 
 var folder = "images/";
 
-var sizeOf = require('image-size');
-sizeOf('images/funny-cats.png', function (err, dimensions) {
-  console.log(dimensions.width, dimensions.height);
-});
-
-$.ajax({
-    url : folder,
-    success: function (data) {
-        $(data).find("a").attr("href", function (i, val) {
-            if( val.match(/\.(jpe?g|png|gif)$/) ) { 
-                $("body").append( "<img src='"+ folder + val +"'>" );
-            } 
-        });
-    }
-});
-
 
 function getSize(photoPath) {
-
+  sizeOf(photoPath, function (err, dimensions) {
+    console.log(dimensions.width, dimensions.height);
+  });
 } 
 
-function getPhotos(photoFolder) {
+function getImgInfos(photoFiles) {
+  var images[];
 
-  $.ajax({
-    type: 'GET',
-    url: '/my/url', //folder
-    success: function(resp) {
+  photoFiles.forEach(function (file) {
+    var width = sizeOf(file).width;
+    var height = sizeOf(file).height;
 
-    },
-    error: function() {
-
-    }
+    // Push image data into our array
+    images.push({
+      name: file.substr(file.lastIndexOf('/') + 1),
+      width: width,
+      height: height,
+      path: file
+    });
   });
 
-  var request = new XMLHttpRequest();
-  request.open('GET', 'photoFolder', true);
-
-  request.onload = function() {
-    if (request.status >= 200 && request.status < 400) {
-      // Success!
-      var resp = request.responseText;
-    } else {
-      // We reached our target server, but it returned an error
-
-    }
-  };
-
-  request.onerror = function() {
-    // There was a connection error of some sort
-  };
-
-  request.send();
-
+  return images;
 }
+
+function resize(file, width, height, name) {
+  sharp(file)
+    .resize(width, height)
+    .toFile(name, function(err) { console.log(err) })
+    .then( data => console.log(data) return data)
+    .catch( err => console.log(err));
+}
+
+
+
+// helper functions
+
+function write(filepath, data, callback) {
+  mkdirp(path.dirname(filepath), function (err) {
+    if (err) {
+      throw err;
+    }
+    fs.writeFile(filepath, data, function (err) {
+      if (err) {
+        throw err;
+      }
+      if (callback) {
+        callback(null, filepath);
+      } else {
+        console.log('File ' + filepath + ' successfully created.');
+      }
+    });
+  });
+};
