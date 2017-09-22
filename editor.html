@@ -11,6 +11,8 @@
   <link rel="stylesheet" href="css/styles.css?v=1.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.3/css/justifiedGallery.min.css">
+
   <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
   <![endif]-->
@@ -23,11 +25,12 @@
     </div>
     <div class="col s8">
       <h2>Photos</h2><hr>
+      <div id="photo-items"></div>
     </div>
     <div class="col s4">
       <h2>Options</h2><hr>
       <form action="#">
-        <div class="file-field input-field">
+        <div class="file-field input-field" id="file-input">
           <div class="btn">
             <span>Photo Files</span>
             <input type="file" multiple>
@@ -40,8 +43,13 @@
     </div>
   </div>
 
-
+  <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.3/js/jquery.justifiedGallery.min.js"></script>
   <script src="js/editor.js"></script>
+  <script src="js/photos.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 </body>
 </html>
